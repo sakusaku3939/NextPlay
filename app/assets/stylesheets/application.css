@@ -17,14 +17,42 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap');
 
 body {
+    font-family: "DotGothic16", sans-serif;
     background-color: #101017;
     color: #fff;
-    font-family: "DotGothic16", sans-serif;
+    margin: 0;
+    padding: 56px;
 }
 
 .logo {
     font-family: "Press Start 2P", sans-serif;
     font-size: 32px;
     text-align: center;
-    margin-top: 64px;
+    margin-bottom: 56px;
+}
+
+.posts-container {
+}
+
+.post {
+    background-color: #272738;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.usernames {
+    padding-top: 8px;
+}
+
+.usernames span:nth-child(1) {
+    margin-right: 8px;
+}
+
+.usernames span:nth-child(2) {
+    color: #8B8B8B;
+}
+
+.post p {
+    margin: 12px 0 16px;
 }
