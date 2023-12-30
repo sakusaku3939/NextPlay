@@ -35,10 +35,21 @@ body {
 }
 
 .post {
+    display: flex;
     background-color: #272738;
     border-radius: 8px;
-    padding: 12px;
+    padding: 12px 16px;
     margin-bottom: 12px;
+}
+
+.post img {
+    width: 46px;
+    height: 46px;
+}
+
+.content {
+    display: inline;
+    margin-left: 12px;
 }
 
 .usernames {
