@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap');
+
+body {
+    background-color: #101017;
+    color: #fff;
+    font-family: "DotGothic16", sans-serif;
+}
+
+.logo {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin-top: 64px;
+}
