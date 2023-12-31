@@ -13,6 +13,17 @@
   </div>
   <div class="sidebar-container">
     <%= link_to "投稿する", new_post_path, class: "new-post-button" %>
+    <div class="card stream-container">
+      <p>配信中のゲーム一覧</p>
+      <div class="stream">
+        <%= image_tag "apex_title.jpg" %>
+        <p>@ice_protocol さんの配信</p>
+      </div>
+      <div class="stream">
+        <%= image_tag "valorant_title.jpg" %>
+        <p>@bootstrap さんの配信</p>
+      </div>
+    </div>
   </div>
 </div>
 
