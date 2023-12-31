@@ -31,7 +31,15 @@ body {
     margin-bottom: 56px;
 }
 
+.container {
+    display: flex;
+}
+
+
+/* posts */
+
 .posts-container {
+    flex-grow: 3;
 }
 
 .post {
@@ -66,4 +74,34 @@ body {
 
 .post p {
     margin: 12px 0 16px;
+}
+
+
+/* sidebar */
+
+.sidebar-container {
+    flex-grow: 2;
+    margin-left: 40px;
+}
+
+.new-post-button {
+    display: inline-block;
+    width: 100%;
+    background-color: #546E7A;
+    border-radius: 8px;
+    padding: 14px 0;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.new-post-button:before {
+    display: inline-flex;
+    vertical-align: middle;
+    font-family: 'Material Icons', sans-serif;
+    content: "\e145";
+    font-size: 20px;
+    margin-right: 8px;
+    padding-bottom: 3px;
 }
