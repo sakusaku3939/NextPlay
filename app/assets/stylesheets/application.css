@@ -20,8 +20,9 @@ body {
     font-family: "DotGothic16", sans-serif;
     background-color: #101017;
     color: #fff;
-    margin: 0;
+    margin: 0 auto;
     padding: 56px;
+    max-width: 1400px;
 }
 
 .logo {
