@@ -21,3 +21,6 @@ Post.create(profile_id: 3, content: "Apexランクやります", stream_id: 2)
 Post.create(profile_id: 4, content: "篝火のスマブラ大会熱すぎる！！あcolaさんのコンボルートめちゃくちゃ上手い")
 Post.create(profile_id: 5, content: "今の置きエイムすごくうまい", stream_id: 1, is_comment: true)
 Post.create(profile_id: 6, content: "Apex@2人 募集しています！誰か一緒にやりましょう")
+
+Stream.create(profile_id: 1, username: "bootstrap")
+Stream.create(profile_id: 3, username: "ice_protocol")

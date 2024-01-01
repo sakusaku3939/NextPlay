@@ -12,18 +12,14 @@
     <%= link_to "投稿する", new_post_path, class: "new-post-button" %>
     <div class="card stream-container">
       <p>配信中のゲーム一覧</p>
-      <div class="stream">
-        <div class="stream-img">
-          <%= image_tag "apex_title.jpg" %>
+      <% @streams.each do |stream| %>
+        <div class="stream">
+          <div class="stream-img">
+            <%= image_tag "apex_title.jpg" %>
+          </div>
+          <p>@<%= stream.username %> さんの配信</p>
         </div>
-        <p>@ice_protocol さんの配信</p>
-      </div>
-      <div class="stream">
-        <div class="stream-img">
-          <%= image_tag "valorant_title.jpg" %>
-        </div>
-        <p>@bootstrap さんの配信</p>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

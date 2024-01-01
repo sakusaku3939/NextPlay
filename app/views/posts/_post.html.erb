@@ -21,7 +21,7 @@
           <span><%= post.profile.nickname %></span>
           <span>@<%= post.profile.username %></span>
         </div>
-        <p><%= post.content %><span class="to-comment">bootstrapさんへの配信コメント</span></p>
+        <p><%= post.content %><span class="to-comment"><%= post.stream.username %>さんへの配信コメント</span></p>
         <div class="post-stream-wrapper">
           <div class="stream-img">
             <%= image_tag "valorant_title.jpg" %>
@@ -42,7 +42,7 @@
             <%= image_tag "apex_title.jpg" %>
           </div>
         </div>
-        <div class="post-stream-start">ice_protocolさんが配信を開始しました！</div>
+        <div class="post-stream-start"><%= post.stream.username %>さんが配信を開始しました！</div>
       </div>
     <% end %>
   </div>
