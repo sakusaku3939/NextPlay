@@ -8,10 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Profile.create(user_id: 1, username: "username", nickname: "HogeHoge")
+Profile.create(user_id: 1, username: "ice_protocol", nickname: "ice_protocol")
 Profile.create(user_id: 2, username: "foo", nickname: "foo")
-Profile.create(user_id: 3, username: "ice_protocol", nickname: "ice_protocol")
+Profile.create(user_id: 3, username: "username", nickname: "HogeHoge")
 
-Post.create(profile_id: 1, content: "Apex@2人 募集しています！誰か一緒にやりましょう")
+Post.create(profile_id: 1, content: "Apexランクやります", stream_id: 2)
 Post.create(profile_id: 2, content: "今の置きエイムすごくうまい", comment_stream_id: 1)
-Post.create(profile_id: 3, content: "Apexランクやります", stream_id: 2)
+Post.create(profile_id: 3, content: "Apex@2人 募集しています！誰か一緒にやりましょう")

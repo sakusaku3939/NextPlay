@@ -18,10 +18,10 @@
       <%= image_tag "user_icon.png" %>
       <div class="content">
         <div class="usernames">
-          <span>ice_protocol</span>
-          <span>@ice_protocol</span>
+          <span><%= post.profile.nickname %></span>
+          <span>@<%= post.profile.username %></span>
         </div>
-        <p>Apexランクやります</p>
+        <p><%= post.content %></p>
         <div class="post-stream-wrapper">
           <div class="stream-img">
             <%= image_tag "apex_title.jpg" %>
@@ -34,10 +34,10 @@
       <%= image_tag "user_icon.png" %>
       <div class="content">
         <div class="usernames">
-          <span>foo</span>
-          <span>@foo</span>
+          <span><%= post.profile.nickname %></span>
+          <span>@<%= post.profile.username %></span>
         </div>
-        <p>今の置きエイムすごくうまい<span class="to-comment">bootstrapさんへの配信コメント</span></p>
+        <p><%= post.content %><span class="to-comment">bootstrapさんへの配信コメント</span></p>
         <div class="post-stream-wrapper">
           <div class="stream-img">
             <%= image_tag "valorant_title.jpg" %>
