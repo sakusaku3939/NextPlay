@@ -6,9 +6,6 @@
   <div class="posts-container">
     <% @posts.each do |post| %>
       <%= render post %>
-      <p>
-        <%= link_to "Show this post", post %>
-      </p>
     <% end %>
   </div>
   <div class="sidebar-container">

@@ -36,6 +36,11 @@ body {
     display: flex;
 }
 
+.a {
+    color: #fff;
+    text-decoration: none;
+}
+
 
 /* posts */
 
@@ -44,7 +49,15 @@ body {
 }
 
 .card {
+    position: relative;
     background-color: #272738;
+    border-radius: 8px;
+}
+
+.card-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
 }
 
@@ -54,6 +67,10 @@ body {
     margin-bottom: 12px;
 }
 
+.post > * {
+    z-index: 1;
+}
+
 .post img {
     width: 46px;
     height: 46px;
@@ -61,7 +78,6 @@ body {
 
 .content {
     display: inline;
-    width: 100%;
     margin-left: 12px;
 }
 
@@ -91,8 +107,7 @@ body {
 }
 
 .post-stream-wrapper {
-    width: 30%;
-    min-width: 240px;
+    width: 280px;
     padding-bottom: 4px;
 }
 
