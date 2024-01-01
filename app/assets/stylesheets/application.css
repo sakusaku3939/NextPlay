@@ -61,6 +61,7 @@ body {
 
 .content {
     display: inline;
+    width: 100%;
     margin-left: 12px;
 }
 
@@ -78,6 +79,27 @@ body {
 
 .post p {
     margin: 12px 0 16px;
+}
+
+.to-comment {
+    color: #7CD0FF;
+}
+
+.to-comment:before {
+    content: " - ";
+    color: #7CD0FF;
+}
+
+.post-stream-wrapper {
+    width: 30%;
+    min-width: 240px;
+    padding-bottom: 4px;
+}
+
+.post-stream-start {
+    color: #7CD0FF;
+    font-size: 14px;
+    margin-bottom: 4px;
 }
 
 
