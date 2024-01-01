@@ -3,7 +3,7 @@
     <div class="card-background"></div>
   <% end %>
   <div class="post">
-    <% if post.stream_id.blank? && post.comment_stream_id.blank? %>
+    <% if post.stream_id.blank? %>
       <!-- 標準の投稿-->
       <%= image_tag "user_icon.png" %>
       <div class="content">
@@ -13,7 +13,22 @@
         </div>
         <p><%= post.content %></p>
       </div>
-    <% elsif !post.stream_id.blank? %>
+    <% elsif post.is_comment %>
+      <!-- 配信に対するコメントの投稿-->
+      <%= image_tag "user_icon.png" %>
+      <div class="content">
+        <div class="usernames">
+          <span><%= post.profile.nickname %></span>
+          <span>@<%= post.profile.username %></span>
+        </div>
+        <p><%= post.content %><span class="to-comment">bootstrapさんへの配信コメント</span></p>
+        <div class="post-stream-wrapper">
+          <div class="stream-img">
+            <%= image_tag "valorant_title.jpg" %>
+          </div>
+        </div>
+      </div>
+    <% else %>
       <!-- 配信を開始したときの投稿-->
       <%= image_tag "user_icon.png" %>
       <div class="content">
@@ -28,21 +43,6 @@
           </div>
         </div>
         <div class="post-stream-start">ice_protocolさんが配信を開始しました！</div>
-      </div>
-    <% else %>
-      <!-- 配信に対するコメントの投稿-->
-      <%= image_tag "user_icon.png" %>
-      <div class="content">
-        <div class="usernames">
-          <span><%= post.profile.nickname %></span>
-          <span>@<%= post.profile.username %></span>
-        </div>
-        <p><%= post.content %><span class="to-comment">bootstrapさんへの配信コメント</span></p>
-        <div class="post-stream-wrapper">
-          <div class="stream-img">
-            <%= image_tag "valorant_title.jpg" %>
-          </div>
-        </div>
       </div>
     <% end %>
   </div>

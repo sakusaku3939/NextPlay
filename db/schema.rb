@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_01_131834) do
     t.integer "profile_id"
     t.string "content"
     t.integer "stream_id"
-    t.integer "comment_stream_id"
+    t.boolean "is_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
