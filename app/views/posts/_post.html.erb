@@ -23,9 +23,11 @@
         </div>
         <p><%= post.content %><span class="to-comment"><%= post.stream.username %>さんへの配信コメント</span></p>
         <div class="post-stream-wrapper">
-          <div class="stream-img">
-            <%= image_tag url_for(post.stream.thumbnail) %>
-          </div>
+          <%= link_to post.stream, class: "a" do %>
+            <div class="stream-img">
+              <%= image_tag url_for(post.stream.thumbnail) %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% else %>
@@ -38,9 +40,11 @@
         </div>
         <p><%= post.content %></p>
         <div class="post-stream-wrapper">
-          <div class="stream-img">
-            <%= image_tag url_for(post.stream.thumbnail) %>
-          </div>
+          <%= link_to post.stream, class: "a" do %>
+            <div class="stream-img">
+              <%= image_tag url_for(post.stream.thumbnail) %>
+            </div>
+          <% end %>
         </div>
         <div class="post-stream-start"><%= post.stream.username %>さんが配信を開始しました！</div>
       </div>

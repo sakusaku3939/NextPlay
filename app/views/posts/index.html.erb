@@ -14,9 +14,11 @@
       <p>配信中のゲーム一覧</p>
       <% @streams.each do |stream| %>
         <div class="stream">
-          <div class="stream-img">
-            <%= image_tag url_for(stream.thumbnail) %>
-          </div>
+          <%= link_to stream, class: "a" do %>
+            <div class="stream-img">
+              <%= image_tag url_for(stream.thumbnail) %>
+            </div>
+          <% end %>
           <p>@<%= stream.username %> さんの配信</p>
         </div>
       <% end %>
