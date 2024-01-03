@@ -15,7 +15,7 @@
       <% @streams.each do |stream| %>
         <div class="stream">
           <div class="stream-img">
-            <%= image_tag "apex_title.jpg" %>
+            <%= image_tag url_for(stream.thumbnail) %>
           </div>
           <p>@<%= stream.username %> さんの配信</p>
         </div>
