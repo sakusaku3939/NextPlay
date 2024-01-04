@@ -8,6 +8,5 @@
 <%= render @post %>
 
 <div class="right">
-  <%= link_to "編集する", edit_post_path(@post), class: "edit" %>
   <%= link_to "投稿を削除", @post, data: { turbo_method: :delete, turbo_confirm: "この投稿を削除しますか？" }, class: "delete" %>
 </div>

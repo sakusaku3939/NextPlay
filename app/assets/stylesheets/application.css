@@ -215,25 +215,10 @@ body {
     font-size: 28px;
 }
 
-.edit {
-    color: #fff;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-.edit:before {
-    vertical-align: middle;
-    font-family: 'Material Icons', sans-serif;
-    content: "\e3c9";
-    color: #fff;
-    margin-right: 4px;
-}
-
 .delete {
     color: #fff;
     font-size: 18px;
     text-decoration: none;
-    margin-left: 16px;
 }
 
 .delete:before {
