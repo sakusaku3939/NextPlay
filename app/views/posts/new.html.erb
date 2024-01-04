@@ -1,9 +1,7 @@
-<h1>New post</h1>
+<%= link_to posts_path do %>
+  <i class="material-icons back">arrow_back</i>
+<% end %>
+
+<h1>新しく投稿</h1>
 
 <%= render "form", post: @post %>
-
-<br>
-
-<div>
-  <%= link_to "Back to posts", posts_path %>
-</div>

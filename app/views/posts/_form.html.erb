@@ -11,27 +11,45 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :profile_id, style: "display: block" %>
-    <%= form.number_field :profile_id %>
-  </div>
+  <%= form.hidden_field :profile_id, :value => 1 %>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_field :content %>
-  </div>
+  <div class="container">
+    <div class="posts-container">
+      <div>
+        <%= form.text_area :content,  maxlength: "240", id: "textarea" %>
+      </div>
+      <div id="text-length">240/240文字</div>
 
-  <div>
-    <%= form.label :stream_id, style: "display: block" %>
-    <%= form.number_field :stream_id %>
-  </div>
+<!--      <div>-->
+        <%#= form.label :stream_id, style: "display: block" %>
+        <%#= form.number_field :stream_id %>
+<!--      </div>-->
 
-  <div>
-    <%= form.label :is_comment, style: "display: block" %>
-    <%= form.check_box :is_comment, {}, "true", "false" %>
-  </div>
+<!--      <div>-->
+        <%#= form.label :is_comment, style: "display: block" %>
+        <%#= form.check_box :is_comment, {}, "true", "false" %>
+<!--      </div>-->
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <div class="sidebar-container">
+      <%= form.submit "投稿する", class: "button new-post-button" %>
+    </div>
   </div>
+<% end %>
+
+<%= content_for :script do %>
+  <script>
+      document.addEventListener('turbo:load', () => {
+          // 投稿画面に入力文字数を表示
+          const textarea = document.getElementById('textarea');
+          textarea.addEventListener('input', () => {
+              const maxLength = textarea.maxLength;
+              const currentLength = textarea.value.length;
+              const remainingLength = maxLength - currentLength;
+
+              const message = document.getElementById('text-length');
+              message.innerHTML = `${remainingLength}/${maxLength}文字`;
+          });
+      })
+  </script>
 <% end %>
