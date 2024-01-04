@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
+
+<%= link_to posts_path do %>
+  <i class="material-icons back">arrow_back</i>
+<% end %>
+
 <%= render @post %>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+<div class="right">
+  <%= link_to "編集する", edit_post_path(@post), class: "edit" %>
+  <%= link_to "投稿を削除", @post, data: { turbo_method: :delete, turbo_confirm: "この投稿を削除しますか？" }, class: "delete" %>
 </div>
