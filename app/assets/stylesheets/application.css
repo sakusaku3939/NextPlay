@@ -264,3 +264,20 @@ body {
 #text-length {
     text-align: right;
 }
+
+details {
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 20px;
+}
+
+.stream-setting {
+    display: flex;
+    gap: 48px;
+    margin-top: 8px;
+}
+
+.stream-setting .stream-img {
+    min-width: 240px;
+}

@@ -20,10 +20,19 @@
       </div>
       <div id="text-length">240/240文字</div>
 
-      <div>
-        <%= form.label :stream_id, style: "display: block" %>
-        <%= form.number_field :stream_id %>
-      </div>
+      <details open>
+        <summary>ライブ配信を開始</summary>
+        <div class="stream-setting">
+          <div>
+            <p>1. サムネイルをアップロード</p>
+            <%= form.file_field :thumbnail, accept: 'image/jpg,image/jpeg,image/png' %>
+          </div>
+          <div>
+            <p>2. 配信環境を設定</p>
+            <div class="stream-img"></div>
+          </div>
+        </div>
+      </details>
     </div>
 
     <div class="sidebar-container">
