@@ -22,11 +22,30 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    # Streamがthumbnailを持っている場合のみ作成
+    if params[:post][:thumbnail].present?
+      @stream = Stream.new(profile_id: params[:post][:profile_id],
+                           username: Profile.find(params[:post][:profile_id]).username,
+                           thumbnail: params[:post][:thumbnail])
+      if @stream.save
+        # Streamが保存されたら、そのIDをPostに格納
+        @post = Post.new(post_params.merge(stream_id: @stream.id))
+      else
+        respond_to do |format|
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+        return
+      end
+    else
+      # thumbnailがない場合は、StreamのIDなしでPostを作成
+      @post = Post.new(post_params)
+    end
 
+    # Postの保存
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        format.html { redirect_to root_url, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,13 +78,14 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:profile_id, :content, :stream_id, :is_comment)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:profile_id, :content, :stream_id, :is_comment)
+  end
 end
