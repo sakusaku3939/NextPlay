@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
+    session["test"]
     # Streamがthumbnailを持っている場合のみ作成
     if params[:post][:thumbnail].present?
       @stream = Stream.new(profile_id: params[:post][:profile_id],
