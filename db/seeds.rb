@@ -22,7 +22,7 @@ Post.create(profile_id: 4, content: "篝火のスマブラ大会熱すぎる！�
 Post.create(profile_id: 5, content: "今の置きエイムすごくうまい", stream_id: 1, is_comment: true)
 Post.create(profile_id: 6, content: "Apex@2人 募集しています！誰か一緒にやりましょう")
 
-stream1 = Stream.create(profile_id: 1, username: "bootstrap")
+stream1 = Stream.create(room_id: "0", profile_id: 1, username: "bootstrap")
 stream1.thumbnail.attach(io: File.open(Rails.root.join('app/assets/images/valorant_title.jpg')), filename: 'valorant_title.jpg')
-stream2 = Stream.create(profile_id: 3, username: "ice_protocol")
+stream2 = Stream.create(room_id: "1", profile_id: 3, username: "ice_protocol")
 stream2.thumbnail.attach(io: File.open(Rails.root.join('app/assets/images/apex_title.jpg')), filename: 'apex_title.jpg')

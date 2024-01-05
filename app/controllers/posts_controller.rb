@@ -22,15 +22,16 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    session["test"]
     # Streamがthumbnailを持っている場合のみ作成
-    if params[:post][:thumbnail].present?
-      @stream = Stream.new(profile_id: params[:post][:profile_id],
+    if params[:post][:thumbnail].present? && !session["room_id"].blank?
+      @stream = Stream.new(room_id: session["room_id"],
+                           profile_id: params[:post][:profile_id],
                            username: Profile.find(params[:post][:profile_id]).username,
                            thumbnail: params[:post][:thumbnail])
       if @stream.save
         # Streamが保存されたら、そのIDをPostに格納
         @post = Post.new(post_params.merge(stream_id: @stream.id))
+        session["room_id"] = ""
       else
         respond_to do |format|
           format.html { render :new, status: :unprocessable_entity }
