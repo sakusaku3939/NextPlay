@@ -281,3 +281,9 @@ details {
 .stream-setting .stream-img {
     min-width: 240px;
 }
+
+.done {
+    color: #8BC34A;
+    font-size: 16px;
+    margin-left: 4px;
+}

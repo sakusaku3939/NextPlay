@@ -24,11 +24,11 @@
         <summary>ライブ配信を開始</summary>
         <div class="stream-setting">
           <div>
-            <p>1. サムネイルをアップロード</p>
-            <%= form.file_field :thumbnail, accept: 'image/jpg,image/jpeg,image/png' %>
+            <p id="setting-step1">1. サムネイルをアップロード</p>
+            <%= form.file_field :thumbnail, accept: 'image/jpg,image/jpeg,image/png', id: "uploader" %>
           </div>
           <div>
-            <p>2. 配信環境を設定</p>
+            <p id="setting-step2">2. 配信環境を設定</p>
             <div class="stream-img"></div>
           </div>
         </div>
@@ -54,6 +54,23 @@
 
               const message = document.getElementById('text-length');
               message.innerHTML = `${remainingLength}/${maxLength}文字`;
+          });
+
+          // アップロードされたサムネイル画像に差し替える
+          // 参考： https://qiita.com/hirogw/items/b4937dbb0ea5f0b60085
+          const uploader = document.getElementById('uploader');
+          uploader.addEventListener('change', () => {
+              const file = uploader.files[0];
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => {
+                  const img = new Image();
+                  img.src = reader.result;
+                  document.querySelector('.stream-img').appendChild(img);
+
+                  // ステップ1完了のチェックマークを追加
+                  document.getElementById('setting-step1').insertAdjacentHTML('beforeend', '<i class="material-icons done">done</i>');
+              }
           });
       })
   </script>
