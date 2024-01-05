@@ -250,7 +250,7 @@ body {
     background-color: #272738;
     border-radius: 8px;
     width: calc(100% - 32px);
-    min-height: 160px;
+    min-height: 120px;
     padding: 16px;
     -webkit-appearance: none;
     -moz-appearance: none;

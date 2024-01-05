@@ -16,19 +16,14 @@
   <div class="container">
     <div class="posts-container">
       <div>
-        <%= form.text_area :content,  maxlength: "240", id: "textarea" %>
+        <%= form.text_area :content, required: true, maxlength: "240", placeholder: "ここに投稿を入力", id: "textarea" %>
       </div>
       <div id="text-length">240/240文字</div>
 
-<!--      <div>-->
-        <%#= form.label :stream_id, style: "display: block" %>
-        <%#= form.number_field :stream_id %>
-<!--      </div>-->
-
-<!--      <div>-->
-        <%#= form.label :is_comment, style: "display: block" %>
-        <%#= form.check_box :is_comment, {}, "true", "false" %>
-<!--      </div>-->
+      <div>
+        <%= form.label :stream_id, style: "display: block" %>
+        <%= form.number_field :stream_id %>
+      </div>
     </div>
 
     <div class="sidebar-container">
@@ -41,6 +36,7 @@
   <script>
       document.addEventListener('turbo:load', () => {
           // 投稿画面に入力文字数を表示
+          // 参考： https://qiita.com/fumi238000/items/0642664ebbf112411b94
           const textarea = document.getElementById('textarea');
           textarea.addEventListener('input', () => {
               const maxLength = textarea.maxLength;
