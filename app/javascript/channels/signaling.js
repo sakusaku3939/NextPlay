@@ -6,10 +6,10 @@ while (!roomId) {
 }
 
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
-const chatChannel = consumer.subscriptions.create({channel: "ChatChannel", room: roomId, id: localId}, {
+const signaling = consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
     connected() {
         console.log("connected with localId: " + localId);
-        chatChannel.perform('speak', {type: "join", room: roomId, id: localId});
+        signaling.perform('speak', {type: "join", room: roomId, id: localId});
     },
 
     disconnected() {
@@ -20,10 +20,10 @@ const chatChannel = consumer.subscriptions.create({channel: "ChatChannel", room:
         if (data['id'] === localId) return;
         console.log(JSON.stringify(data));
         if (data['type'] === "join") {
-            chatChannel.perform('speak', {type: "offer", message: "Hello, Rails! " + localId});
+            signaling.perform('speak', {type: "offer", message: "Hello, Rails! " + localId});
         }
         if (data['type'] === "offer") {
-            chatChannel.perform('speak', {type: "answer", message: "Hello, Rails! " + localId});
+            signaling.perform('speak', {type: "answer", message: "Hello, Rails! " + localId});
         }
     },
 });
