@@ -1,8 +1,15 @@
 import consumer from "./consumer"
 
-const chatChannel = consumer.subscriptions.create("ChatChannel", {
+let roomId;
+while (!roomId) {
+    roomId = window.prompt('Room ID', '');
+}
+
+const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
+const chatChannel = consumer.subscriptions.create({channel: "ChatChannel", room: roomId, id: localId}, {
     connected() {
-        // 接続時の処理
+        console.log("connected with localId: " + localId);
+        chatChannel.perform('speak', {type: "join", room: roomId, id: localId});
     },
 
     disconnected() {
@@ -10,14 +17,13 @@ const chatChannel = consumer.subscriptions.create("ChatChannel", {
     },
 
     received(data) {
-        console.log(data.message);
+        if (data['id'] === localId) return;
+        console.log(JSON.stringify(data));
+        if (data['type'] === "join") {
+            chatChannel.perform('speak', {type: "offer", message: "Hello, Rails! " + localId});
+        }
+        if (data['type'] === "offer") {
+            chatChannel.perform('speak', {type: "answer", message: "Hello, Rails! " + localId});
+        }
     },
-
-    speak: function (message) {
-        return this.perform('speak', {message: message});
-    }
 });
-
-setTimeout(() => {
-    chatChannel.speak("Hello, Rails!");
-}, 1000);
