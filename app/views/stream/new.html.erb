@@ -1,1 +1,6 @@
+<video id="localVideo" playsinline autoplay muted></video>
+
+<%= content_for :script do %>
+  <%= javascript_import_module_tag "webrtc/stream" %>
+<% end %>
 <% session["room_id"] = SecureRandom.uuid %>

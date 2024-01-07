@@ -287,3 +287,7 @@ details {
     font-size: 16px;
     margin-left: 4px;
 }
+
+video {
+    width: 100%;
+}

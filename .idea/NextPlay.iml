@@ -9,24 +9,24 @@
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
-    <orderEntry type="jdk" jdkName="Remote: ruby-3.3.0 (-p0" jdkType="RUBY_SDK" />
+    <orderEntry type="jdk" jdkName="Remote: ruby-3.2.2 (-p0 (2)" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="bigdecimal (v3.1.5, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="debug (v1.9.1, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="drb (v2.2.0, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="io-console (v0.7.1, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="irb (v1.11.0, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.2, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.20.0, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.4.9, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.4.0, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="psych (v5.1.2, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="racc (v1.7.3, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rake (v13.1.0, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rdoc (v6.6.2, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="reline (v0.4.1, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rexml (v3.2.6, Remote: ruby-3.3.0 (-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bigdecimal (v3.1.5, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="debug (v1.9.1, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="drb (v2.2.0, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="io-console (v0.7.1, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="irb (v1.11.0, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.2, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.20.0, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.4.9, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.4.0, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="psych (v5.1.2, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="racc (v1.7.3, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rake (v13.1.0, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rdoc (v6.6.2, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="reline (v0.4.1, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rexml (v3.2.6, Remote: ruby-3.2.2 (-p0 (2)) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />

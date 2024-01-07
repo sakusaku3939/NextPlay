@@ -1,2 +1,8 @@
 <h1>Stream#show</h1>
 <p>Find me in app/views/stream/show.html.erb</p>
+
+<div id="remote"></div>
+
+<%= content_for :script do %>
+  <%= javascript_import_module_tag "webrtc/viewer" %>
+<% end %>

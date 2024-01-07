@@ -9,8 +9,11 @@ class SignalingChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    if data['message']
-      ActionCable.server.broadcast("room_#{params[:room]}", { type: data['type'], message: data['message'], id: params[:id] })
+    if data['type'] == "offer" || data['type'] == "answer"
+      ActionCable.server.broadcast("room_#{params[:room]}", { type: data['type'], sdp: data['sdp'], room: data['room'], id: params[:id] })
+    end
+    if data['type'] == "ice"
+      ActionCable.server.broadcast("room_#{params[:room]}", { type: data['type'], ice: data['ice'], room: data['room'], id: params[:id] })
     end
   end
 end
