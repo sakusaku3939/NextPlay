@@ -85,7 +85,7 @@ function startVideo() {
 
 function gotMessageFromServer(data) {
     if (data['type'] === "join") {
-        startPeerConnection(data['id'], "offer")
+        startPeerConnection(localId, "offer")
         // signaling.perform('speak', {type: "offer", message: "Hello, Rails! " + localId});
     }
     if (data['type'] === "offer") {
@@ -159,6 +159,7 @@ function startPeerConnection(id, sdpType) {
         if (!pc) {
             return;
         }
+        console.log("close")
         pc.close();
         pc = null;
         peers.delete(id);

@@ -47,7 +47,7 @@ document.addEventListener('turbo:load', () => {
 
 function gotMessageFromServer(data) {
     if (data['type'] === "join") {
-        startPeerConnection(data['id'], "offer")
+        startPeerConnection(localId, "offer")
         // signaling.perform('speak', {type: "offer", message: "Hello, Rails! " + localId});
     }
     if (data['type'] === "offer") {
@@ -122,9 +122,11 @@ function startPeerConnection(id, sdpType) {
         if (pc) {
             // Remote側のストリームを設定
             if (event.streams && event.streams[0]) {
+                console.log(event.streams)
                 pc._remoteVideo.srcObject = event.streams[0];
                 // revokePermissions();
             } else {
+                alert("ok")
                 pc._remoteVideo.srcObject = new MediaStream(event.track);
             }
         }
@@ -135,6 +137,7 @@ function startPeerConnection(id, sdpType) {
         }
         if (pc._remoteVideo && pc._remoteVideo.srcObject) {
             try {
+                console.log("close")
                 pc._remoteVideo.srcObject.getTracks().forEach(track => {
                     track.stop();
                 });
