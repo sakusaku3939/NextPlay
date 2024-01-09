@@ -60,9 +60,9 @@ function startVideo() {
     }
 }
 
-function startPeerConnection(sdpType) {
-    if (peers.has(localId)) {
-        peers.get(localId)._stopPeerConnection();
+function startPeerConnection(id, sdpType) {
+    if (peers.has(id)) {
+        peers.get(id)._stopPeerConnection();
     }
     let pc = new RTCPeerConnection(peerConnectionConfig);
 
@@ -93,9 +93,9 @@ function startPeerConnection(sdpType) {
         console.log("close")
         pc.close();
         pc = null;
-        peers.delete(localId);
+        peers.delete(id);
     };
-    peers.set(localId, pc);
+    peers.set(id, pc);
 
     if (sdpType === 'offer') {
         // Offerの作成

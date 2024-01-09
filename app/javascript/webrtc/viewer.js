@@ -21,15 +21,15 @@ document.addEventListener('turbo:load', () => {
     })
 });
 
-function startPeerConnection(sdpType) {
-    if (peers.has(localId)) {
-        peers.get(localId)._stopPeerConnection();
+function startPeerConnection(id, sdpType) {
+    if (peers.has(id)) {
+        peers.get(id)._stopPeerConnection();
     }
     let pc = new RTCPeerConnection(peerConnectionConfig);
 
-    document.getElementById('remote').insertAdjacentHTML('beforeend', '<video id="' + localId + '" playsinline autoplay></video>');
+    document.getElementById('remote').insertAdjacentHTML('beforeend', '<video id="' + id + '" playsinline autoplay></video>');
 
-    pc._remoteVideo = document.getElementById(localId);
+    pc._remoteVideo = document.getElementById(id);
     pc._queue = [];
     pc._setDescription = function (description) {
         if (pc) {
@@ -79,9 +79,9 @@ function startPeerConnection(sdpType) {
         }
         pc.close();
         pc = null;
-        peers.delete(localId);
+        peers.delete(id);
     };
-    peers.set(localId, pc);
+    peers.set(id, pc);
 
     if (sdpType === 'offer') {
         // Offerの作成
