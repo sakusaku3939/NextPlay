@@ -37,7 +37,6 @@ export function init_signaling(localId, roomId, startPeerConnection) {
 
         received(data) {
             if (data['id'] === localId) return;
-            console.log(JSON.stringify(data));
             gotMessageFromServer(data, localId, startPeerConnection)
         },
     });
@@ -45,20 +44,21 @@ export function init_signaling(localId, roomId, startPeerConnection) {
 
 function gotMessageFromServer(data, localId, startPeerConnection) {
     if (data['type'] === "start") {
-        console.log("start")
+        console.log("start: " + JSON.stringify(data['members']))
         data['members'].forEach(id => startPeerConnection(id, 'offer'));
         return;
     }
     if (data['type'] === "join") {
-        console.log("join")
+        console.log("join: " + data['id'])
         startPeerConnection(data['id'], "answer");
         return;
     }
+    console.log(JSON.stringify(data));
+
     const pc = peers.get(data['id']);
     if (!pc) {
         return;
     }
-    // 以降はWebRTCのシグナリング処理
     if ("sdp" in data) {
         // SDP受信
         if (data['type'] === 'offer') {

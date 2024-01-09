@@ -27,10 +27,10 @@ class SignalingChannel < ApplicationCable::Channel
       SignalingChannel.broadcast_to(params[:id], { type: "start", members: @@members[room_id].reject { |e| e == params[:id] } })
     end
     if data['type'] == "offer" || data['type'] == "answer"
-      SignalingChannel.broadcast_to(data['id'], { type: data['type'], sdp: data['sdp'], room: data['room'], id: params[:id] })
+      SignalingChannel.broadcast_to(data['id'], { type: data['type'], sdp: data['sdp'], room: params[:room], id: params[:id] })
     end
     if data['type'] == "ice"
-      SignalingChannel.broadcast_to(data['id'], { type: data['type'], ice: data['ice'], room: data['room'], id: params[:id] })
+      SignalingChannel.broadcast_to(data['id'], { type: data['type'], ice: data['ice'], room: params[:room], id: params[:id] })
     end
   end
 end
