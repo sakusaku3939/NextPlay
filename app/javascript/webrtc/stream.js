@@ -1,3 +1,10 @@
+/*
+* 参考（元となったコード）
+* MIT License
+* Copyright (c) 2022 nakka
+*
+* https://github.com/nakkag/webrtc_mesh/blob/main/webrtc_mesh.js
+* */
 import {peers, peerConnectionConfig, init_signaling, errorHandler} from "./signaling"
 
 let localVideo;
@@ -53,9 +60,9 @@ function startVideo() {
     }
 }
 
-function startPeerConnection(id, sdpType) {
-    if (peers.has(id)) {
-        peers.get(id)._stopPeerConnection();
+function startPeerConnection(sdpType) {
+    if (peers.has(localId)) {
+        peers.get(localId)._stopPeerConnection();
     }
     let pc = new RTCPeerConnection(peerConnectionConfig);
 
@@ -86,9 +93,9 @@ function startPeerConnection(id, sdpType) {
         console.log("close")
         pc.close();
         pc = null;
-        peers.delete(id);
+        peers.delete(localId);
     };
-    peers.set(id, pc);
+    peers.set(localId, pc);
 
     if (sdpType === 'offer') {
         // Offerの作成

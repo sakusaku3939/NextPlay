@@ -1,3 +1,10 @@
+/*
+* 参考（元となったコード）
+* MIT License
+* Copyright (c) 2022 nakka
+*
+* https://github.com/nakkag/webrtc_mesh/blob/main/webrtc_mesh.js
+* */
 import {peers, peerConnectionConfig, init_signaling, errorHandler} from "./signaling"
 
 let localStream;
@@ -14,15 +21,15 @@ document.addEventListener('turbo:load', () => {
     })
 });
 
-function startPeerConnection(id, sdpType) {
-    if (peers.has(id)) {
-        peers.get(id)._stopPeerConnection();
+function startPeerConnection(sdpType) {
+    if (peers.has(localId)) {
+        peers.get(localId)._stopPeerConnection();
     }
     let pc = new RTCPeerConnection(peerConnectionConfig);
 
-    document.getElementById('remote').insertAdjacentHTML('beforeend', '<video id="' + id + '" playsinline autoplay></video>');
+    document.getElementById('remote').insertAdjacentHTML('beforeend', '<video id="' + localId + '" playsinline autoplay></video>');
 
-    pc._remoteVideo = document.getElementById(id);
+    pc._remoteVideo = document.getElementById(localId);
     pc._queue = [];
     pc._setDescription = function (description) {
         if (pc) {
@@ -44,11 +51,9 @@ function startPeerConnection(id, sdpType) {
         if (pc) {
             // Remote側のストリームを設定
             if (event.streams && event.streams[0]) {
-                console.log(event.streams)
                 pc._remoteVideo.srcObject = event.streams[0];
                 // revokePermissions();
             } else {
-                alert("ok")
                 pc._remoteVideo.srcObject = new MediaStream(event.track);
             }
         }
@@ -74,9 +79,9 @@ function startPeerConnection(id, sdpType) {
         }
         pc.close();
         pc = null;
-        peers.delete(id);
+        peers.delete(localId);
     };
-    peers.set(id, pc);
+    peers.set(localId, pc);
 
     if (sdpType === 'offer') {
         // Offerの作成

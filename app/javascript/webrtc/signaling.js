@@ -1,3 +1,10 @@
+/*
+* 参考（元となったコード）
+* MIT License
+* Copyright (c) 2022 nakka
+*
+* https://github.com/nakkag/webrtc_mesh/blob/main/webrtc_mesh.js
+* */
 import consumer from "./consumer";
 
 export const peers = new Map();
@@ -38,10 +45,10 @@ export function init_signaling(localId, roomId, startPeerConnection) {
 
 function gotMessageFromServer(data, localId, startPeerConnection) {
     if (data['type'] === "join") {
-        startPeerConnection(localId, "offer")
+        startPeerConnection("offer")
     }
     if (data['type'] === "offer") {
-        startPeerConnection(localId, "answer");
+        startPeerConnection("answer");
     }
     const pc = peers.get(localId);
     if (!pc) {
