@@ -71,14 +71,14 @@ function startPeerConnection(id, sdpType) {
         if (pc) {
             pc.setLocalDescription(description).then(() => {
                 // SDP送信
-                signaling.perform('speak', {type: sdpType, sdp: pc.localDescription, room: roomId});
+                signaling.perform('speak', {type: sdpType, sdp: pc.localDescription, room: roomId, id: id});
             }).catch(errorHandler);
         }
     }
     pc.onicecandidate = function (event) {
         if (event.candidate) {
             // ICE送信
-            signaling.perform('speak', {type: "ice", ice: event.candidate, room: roomId});
+            signaling.perform('speak', {type: "ice", ice: event.candidate, room: roomId, id: id});
         }
     };
     if (window.stream) {

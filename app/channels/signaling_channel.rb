@@ -6,6 +6,7 @@ class SignalingChannel < ApplicationCable::Channel
 
     # 新しいユーザーが参加したとき
     stream_from room_id
+    stream_for params[:id]
 
     # 参加者リストを更新
     @@members[room_id] ||= []
@@ -23,13 +24,13 @@ class SignalingChannel < ApplicationCable::Channel
     room_id = "room_#{params[:room]}"
 
     if data['type'] == "start"
-      ActionCable.server.broadcast(room_id, { type: "start", id: params[:id], members: @@members[room_id].reject { |e| e == params[:id] } })
+      SignalingChannel.broadcast_to(params[:id], { type: "start", members: @@members[room_id].reject { |e| e == params[:id] } })
     end
     if data['type'] == "offer" || data['type'] == "answer"
-      ActionCable.server.broadcast(room_id, { type: data['type'], sdp: data['sdp'], room: data['room'], id: params[:id] })
+      SignalingChannel.broadcast_to(data['id'], { type: data['type'], sdp: data['sdp'], room: data['room'], id: params[:id] })
     end
     if data['type'] == "ice"
-      ActionCable.server.broadcast(room_id, { type: data['type'], ice: data['ice'], room: data['room'], id: params[:id] })
+      SignalingChannel.broadcast_to(data['id'], { type: data['type'], ice: data['ice'], room: data['room'], id: params[:id] })
     end
   end
 end

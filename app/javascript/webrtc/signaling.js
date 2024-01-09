@@ -23,7 +23,7 @@ export function init_signaling(localId, roomId, startPeerConnection) {
     return consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
         connected() {
             console.log("connected with localId: " + localId);
-            this.perform('speak', {type: "start", room: roomId, id: localId});
+            this.perform('speak', {type: "start"});
         },
 
         disconnected() {
@@ -36,6 +36,7 @@ export function init_signaling(localId, roomId, startPeerConnection) {
         },
 
         received(data) {
+            if (data['id'] === localId) return;
             console.log(JSON.stringify(data));
             gotMessageFromServer(data, localId, startPeerConnection)
         },
@@ -43,11 +44,13 @@ export function init_signaling(localId, roomId, startPeerConnection) {
 }
 
 function gotMessageFromServer(data, localId, startPeerConnection) {
-    if (data['type'] === "start" && data['id'] === localId) {
+    if (data['type'] === "start") {
+        console.log("start")
         data['members'].forEach(id => startPeerConnection(id, 'offer'));
         return;
     }
-    if (data['type'] === "join" && data['id'] !== localId) {
+    if (data['type'] === "join") {
+        console.log("join")
         startPeerConnection(data['id'], "answer");
         return;
     }
