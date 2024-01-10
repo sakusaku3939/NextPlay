@@ -39,6 +39,8 @@ function startVideo() {
                     ideal: 60,
                     max: 60,
                 },
+                width: {max: 1280},
+                height: {max: 720},
             },
             audio: true,
             preferCurrentTab: false,
