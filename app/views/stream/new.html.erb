@@ -1,4 +1,8 @@
-<video id="localVideo" playsinline autoplay muted></video>
+<h1>配信プレビュー</h1>
+
+<div class="video-frame">
+  <video id="localVideo" playsinline autoplay muted></video>
+</div>
 
 <%= content_for :script do %>
   <%= javascript_import_module_tag "webrtc/stream" %>

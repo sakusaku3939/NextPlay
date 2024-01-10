@@ -1,7 +1,8 @@
-<h1>Stream#show</h1>
-<p>Find me in app/views/stream/show.html.erb</p>
+<h1><%= @stream.username %>さんの配信</h1>
 
-<div id="remote"></div>
+<div class="video-frame">
+  <div id="remote"></div>
+</div>
 
 <%= content_for :script do %>
   <%= javascript_import_module_tag "webrtc/viewer" %>

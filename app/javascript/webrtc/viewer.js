@@ -12,6 +12,7 @@ let roomId;
 let signaling;
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
 document.addEventListener('turbo:load', () => {
+    document.getElementById('remote').innerHTML = '<div class="video-loader">ロード中です。。。</div>';
     while (!roomId) {
         roomId = window.prompt('Room ID', '');
     }
@@ -27,7 +28,7 @@ function startPeerConnection(id, sdpType) {
     }
     let pc = new RTCPeerConnection(peerConnectionConfig);
 
-    document.getElementById('remote').insertAdjacentHTML('beforeend', '<video id="' + id + '" playsinline autoplay></video>');
+    document.getElementById('remote').innerHTML = '<video id="' + id + '" playsinline autoplay></video>';
 
     pc._remoteVideo = document.getElementById(id);
     pc._queue = [];

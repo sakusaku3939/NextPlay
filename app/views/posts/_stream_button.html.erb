@@ -1,4 +1,4 @@
-<%= link_to stream, class: "a", data: { turbo_method: :get, turbo_confirm: "配信を視聴しますか？" } do %>
+<%= link_to stream, class: "a", data: { turbo_method: :get, turbo_confirm: "配信を視聴しますか？" }, stream: stream do %>
   <div class="stream-img">
     <%= image_tag url_for(stream.thumbnail) %>
   </div>

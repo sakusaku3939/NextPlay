@@ -288,6 +288,16 @@ details {
     margin-left: 4px;
 }
 
+.video-frame {
+    width: 100%;
+}
+
+.video-loader {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+}
+
 video {
     width: 100%;
 }
