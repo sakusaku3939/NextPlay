@@ -1,7 +1,7 @@
-<% session["room_id"] = SecureRandom.uuid %>
+<% session["room_id"] = @room_id %>
 <h1>配信プレビュー</h1>
 
-<div class="video-frame" data-room-id="<%= session["room_id"] %>">
+<div class="video-frame" data-room-id="<%= @room_id %>">
   <video id="localVideo" playsinline autoplay muted></video>
 </div>
 

@@ -29,7 +29,7 @@
           </div>
           <div>
             <p id="setting-step2">2. 配信環境を設定</p>
-            <%= link_to new_stream_path, class: "a", target: :_blank do %>
+            <%= link_to new_stream_path(id: SecureRandom.uuid), class: "a", target: :_blank do %>
               <div class="stream-img"></div>
             <% end %>
           </div>

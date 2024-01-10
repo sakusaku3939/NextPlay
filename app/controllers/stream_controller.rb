@@ -4,5 +4,6 @@ class StreamController < ApplicationController
   end
 
   def new
+    @room_id = params[:id]
   end
 end
