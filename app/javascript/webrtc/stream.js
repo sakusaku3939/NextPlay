@@ -12,9 +12,8 @@ let roomId;
 let signaling;
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
 document.addEventListener('turbo:load', () => {
-    while (!roomId) {
-        roomId = 1;
-    }
+    const videoFrame = document.querySelector('.video-frame');
+    roomId = videoFrame.dataset.roomId;
     startVideo();
 });
 

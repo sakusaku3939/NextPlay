@@ -22,7 +22,7 @@ export const peerConnectionConfig = {
 export function init_signaling(localId, roomId, startPeerConnection) {
     return consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
         connected() {
-            console.log("connected with localId: " + localId);
+            console.log("connected with localId: " + localId + ", roomId: " + roomId);
             this.perform('speak', {type: "start"});
         },
 
