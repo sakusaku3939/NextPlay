@@ -27,12 +27,6 @@ export function init_signaling(localId, roomId, startPeerConnection) {
         },
 
         disconnected() {
-            const pc = peers.get(localId);
-            if (!pc) {
-                return;
-            }
-            // 退出通知
-            pc._stopPeerConnection();
         },
 
         received(data) {
@@ -59,6 +53,14 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
     if (!pc) {
         return;
     }
+    if (data['type'] === "leave") {
+        // 退出通知
+        console.log("leave: " + data['id'])
+        pc._stopPeerConnection();
+        return;
+    }
+
+    // WebRTCのシグナリング
     if ("sdp" in data) {
         // SDP受信
         if (data['type'] === 'offer') {

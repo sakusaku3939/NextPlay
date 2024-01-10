@@ -18,6 +18,7 @@ class SignalingChannel < ApplicationCable::Channel
   def unsubscribed
     room_id = "room_#{params[:room]}"
     @@members[room_id].delete(params[:id])
+    ActionCable.server.broadcast(room_id, { type: "leave", id: params[:id] })
   end
 
   def speak(data)
