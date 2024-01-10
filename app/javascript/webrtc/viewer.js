@@ -81,6 +81,7 @@ function startPeerConnection(id, sdpType) {
         pc.close();
         pc = null;
         peers.delete(id);
+        document.getElementById('remote').innerHTML = '<div class="video-loader">ロード中です。。。</div>';
     };
     peers.set(id, pc);
 

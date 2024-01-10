@@ -84,7 +84,10 @@ function startPeerConnection(id, sdpType) {
     };
     if (window.stream) {
         // Local側のストリームを設定
-        window.stream.getTracks().forEach(track => pc.addTrack(track, window.stream));
+        window.stream.getTracks().forEach(track => {
+            pc.addTrack(track, window.stream);
+            track.onended = () => signaling.perform('speak', {type: "leave"});
+        });
     }
 
     pc._stopPeerConnection = function () {

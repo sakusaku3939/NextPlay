@@ -16,9 +16,7 @@ class SignalingChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    room_id = "room_#{params[:room]}"
-    @@members[room_id].delete(params[:id])
-    ActionCable.server.broadcast(room_id, { type: "leave", id: params[:id] })
+    leave
   end
 
   def speak(data)
@@ -27,11 +25,22 @@ class SignalingChannel < ApplicationCable::Channel
     if data['type'] == "start"
       SignalingChannel.broadcast_to(params[:id], { type: "start", members: @@members[room_id].reject { |e| e == params[:id] } })
     end
+    if data['type'] == "leave"
+      leave
+    end
     if data['type'] == "offer" || data['type'] == "answer"
       SignalingChannel.broadcast_to(data['id'], { type: data['type'], sdp: data['sdp'], room: params[:room], id: params[:id] })
     end
     if data['type'] == "ice"
       SignalingChannel.broadcast_to(data['id'], { type: data['type'], ice: data['ice'], room: params[:room], id: params[:id] })
     end
+  end
+
+  private
+
+  def leave
+    room_id = "room_#{params[:room]}"
+    @@members[room_id].delete(params[:id])
+    ActionCable.server.broadcast(room_id, { type: "leave", id: params[:id] })
   end
 end
