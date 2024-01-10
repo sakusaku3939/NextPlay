@@ -13,7 +13,7 @@ let signaling;
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
 document.addEventListener('turbo:load', () => {
     while (!roomId) {
-        roomId = window.prompt('Room ID', '');
+        roomId = 1;
     }
     startVideo();
 });

@@ -4,7 +4,17 @@
   <video id="localVideo" playsinline autoplay muted></video>
 </div>
 
+<%= button_tag "配信を終了する", class: "end-stream-button button", type: "button", onclick: "closeTab()" %>
+
 <%= content_for :script do %>
   <%= javascript_import_module_tag "webrtc/stream" %>
+  <script>
+      function closeTab() {
+          if (confirm("配信を終了しますか？")) {
+              window.close();
+          }
+      }
+  </script>
 <% end %>
+
 <% session["room_id"] = SecureRandom.uuid %>

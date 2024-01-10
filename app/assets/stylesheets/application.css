@@ -293,11 +293,21 @@ details {
 }
 
 .video-loader {
-    width: 100%;
     text-align: center;
     padding: 40px 0;
 }
 
 video {
     width: 100%;
+}
+
+.end-stream-button {
+    width: 280px;
+    background-color: #546E7A;
+    border-radius: 8px;
+    padding: 14px 0;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 8px;
 }
