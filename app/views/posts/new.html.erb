@@ -4,4 +4,82 @@
 
 <h1>新しく投稿</h1>
 
-<%= render "form", post: @post %>
+<%= form_with(model: @post) do |form| %>
+  <% if @post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :profile_id, :value => 1 %>
+
+  <div class="container">
+    <div class="posts-container">
+      <div>
+        <%= form.text_area :content, required: true, maxlength: "240", placeholder: "ここに投稿を入力", id: "textarea" %>
+      </div>
+      <div id="text-length">240/240文字</div>
+
+      <details open>
+        <summary>ライブ配信を開始</summary>
+        <div class="stream-setting">
+          <div>
+            <p id="setting-step1">1. サムネイルをアップロード</p>
+            <%= form.file_field :thumbnail, accept: 'image/jpg,image/jpeg,image/png', id: "uploader" %>
+          </div>
+          <div>
+            <p id="setting-step2">2. 配信環境を設定</p>
+            <%= link_to new_stream_path(id: SecureRandom.uuid), class: "a", target: :_blank do %>
+              <div class="stream-img"></div>
+            <% end %>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="sidebar-container">
+      <%= form.submit "投稿する", class: "button new-post-button" %>
+    </div>
+  </div>
+<% end %>
+
+<%= content_for :script do %>
+  <script>
+      document.addEventListener('turbo:load', () => {
+          // 投稿画面に入力文字数を表示
+          // 参考： https://qiita.com/fumi238000/items/0642664ebbf112411b94
+          const textarea = document.getElementById('textarea');
+          textarea.addEventListener('input', () => {
+              const maxLength = textarea.maxLength;
+              const currentLength = textarea.value.length;
+              const remainingLength = maxLength - currentLength;
+
+              const message = document.getElementById('text-length');
+              message.innerHTML = `${remainingLength}/${maxLength}文字`;
+          });
+
+          // アップロードされたサムネイル画像に差し替える
+          // 参考： https://qiita.com/hirogw/items/b4937dbb0ea5f0b60085
+          const uploader = document.getElementById('uploader');
+          uploader.addEventListener('change', () => {
+              const file = uploader.files[0];
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => {
+                  const img = new Image();
+                  img.src = reader.result;
+                  document.querySelector('.stream-img').appendChild(img);
+
+                  // ステップ1完了のチェックマークを追加
+                  document.getElementById('setting-step1').insertAdjacentHTML('beforeend', '<i class="material-icons done">done</i>');
+              }
+          });
+      })
+  </script>
+<% end %>
