@@ -13,9 +13,8 @@ let signaling;
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
 document.addEventListener('turbo:load', () => {
     document.getElementById('remote').innerHTML = '<div class="video-loader">ロード中です。。。</div>';
-    while (!roomId) {
-        roomId = window.prompt('Room ID', '');
-    }
+    const videoFrame = document.querySelector('.video-frame');
+    roomId = videoFrame.dataset.roomId;
     navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
         signaling = init_signaling(localId, roomId, startPeerConnection);
         localStream = stream;
