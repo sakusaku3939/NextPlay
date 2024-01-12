@@ -35,7 +35,7 @@
           </div>
           <div>
             <p id="setting-step2">2. 配信環境を設定</p>
-            <%= link_to new_stream_path(id: SecureRandom.uuid), class: "a", target: :_blank do %>
+            <%= link_to new_stream_path(id: SecureRandom.uuid), class: "a", id: "step2", target: :_blank do %>
               <div class="stream-img"></div>
             <% end %>
           </div>
@@ -79,6 +79,12 @@
                   // ステップ1完了のチェックマークを追加
                   document.getElementById('setting-step1').insertAdjacentHTML('beforeend', '<i class="material-icons done">done</i>');
               }
+          });
+
+          // ステップ2完了のチェックマークを追加
+          const step2 = document.getElementById('step2');
+          step2.addEventListener('click', () => {
+              document.getElementById('setting-step2').insertAdjacentHTML('beforeend', '<i class="material-icons done">done</i>');
           });
       })
   </script>
