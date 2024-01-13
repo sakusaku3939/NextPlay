@@ -1,13 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<div class="login-container">
+  <% if user_signed_in? %>
+    <%= link_to current_user.profile.username + 'さんのプロフィール', @user, method: :get, class: "login-button" %>
+    <%#= link_to 'ログアウト', destroy_user_session_path, method: :get, class: "login-button" %>
+  <% else %>
+    <%= link_to 'ログイン', new_user_session_path, class: "login-button" %>
+  <% end %>
+</div>
 
 <div class="logo">NextPlay</div>
-
-<% if user_signed_in? %>
-  <p>You are <%= current_user.email %></p>
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Login', new_user_session_path %>
-<% end %>
 
 <div class="container">
   <div class="posts-container">
@@ -16,7 +16,7 @@
     <% end %>
   </div>
   <div class="sidebar-container">
-    <%= link_to "投稿する", new_post_path, class: "new-post-button" %>
+    <%= link_to "投稿する", new_post_path, class: "new-post-button a" %>
     <div class="card stream-container">
       <p>配信中のゲーム一覧</p>
       <% @streams.each do |stream| %>

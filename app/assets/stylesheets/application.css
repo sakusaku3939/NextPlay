@@ -36,7 +36,15 @@ body {
     display: flex;
 }
 
-.a {
+a {
+    color: #64B5F6;
+}
+
+a:visited {
+    color: #BA68C8;
+}
+
+.a, .a:visited {
     color: #fff;
     text-decoration: none;
 }
@@ -60,6 +68,30 @@ body {
 
 .row {
     display: flex;
+}
+
+
+/* user */
+
+.login-container {
+    position: absolute;
+    top: 24px;
+    right: 48px;
+    display: flex;
+}
+
+.login-container:before {
+    display: inline-flex;
+    vertical-align: middle;
+    font-family: 'Material Icons', sans-serif;
+    content: "\e7fd";
+    font-size: 20px;
+    margin-right: 8px;
+    padding-bottom: 3px;
+}
+
+.login-button, .login-button:visited {
+    color: #fff;
 }
 
 

@@ -1,4 +1,6 @@
 class StreamController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @stream = Stream.find(params[:id])
     @profile = Profile.find(1)
