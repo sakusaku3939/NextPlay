@@ -324,6 +324,7 @@ video {
     margin: 0 0 4px 16px;
     background-color: #272738;
     border-radius: 8px;
+    overflow-y: auto;
 }
 
 .comment-title {
@@ -351,8 +352,9 @@ video {
     margin-left: 12px;
 }
 
-#comment-list {
-
+#comment-list li {
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 .line {

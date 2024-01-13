@@ -1,9 +1,18 @@
 <% session["room_id"] = @room_id %>
 <h1>配信画面</h1>
 
-<div class="video-frame" data-room-id="<%= @room_id %>">
-  <video id="localVideo" playsinline autoplay muted></video>
+<hr class="line">
+<div class="row">
+  <div class="video-frame" data-room-id="<%= @room_id %>">
+    <video id="localVideo" playsinline autoplay muted></video>
+  </div>
+  <div class="comment-wrapper">
+    <div class="comment-title">コメント</div>
+    <ul id="comment-list"></ul>
+  </div>
 </div>
+<%= render 'stream_button', stream: stream %>
+
 
 <%= button_tag "配信を終了する", class: "end-stream-button button", type: "button", onclick: "closeTab()" %>
 

@@ -12,9 +12,26 @@ let roomId;
 let signaling;
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
 document.addEventListener('turbo:load', () => {
+    // ローディング表示、ルームIDを設定
     document.getElementById('remote').innerHTML = '<div class="video-loader">ロード中です。。。</div>';
     const videoFrame = document.querySelector('.video-frame');
     roomId = videoFrame.dataset.roomId;
+
+    // 配信コメントの送信
+    document.getElementById('comment-button').addEventListener('click', () => {
+        const commentField = document.getElementById('comment-field');
+        if (commentField.value) {
+            signaling.perform('speak', {
+                type: "comment",
+                content: commentField.value,
+                username: commentField.dataset.username
+            });
+            // フォームの入力値をリセット
+            setTimeout(() => commentField.value = '', 200);
+        }
+    });
+
+    // WebRTCの受信設定
     navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
         signaling = init_signaling(localId, roomId, startPeerConnection);
         localStream = stream;

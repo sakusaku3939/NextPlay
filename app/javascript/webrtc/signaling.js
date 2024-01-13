@@ -37,6 +37,13 @@ export function init_signaling(localId, roomId, startPeerConnection) {
 }
 
 function gotMessageFromServer(data, localId, startPeerConnection) {
+    if (data['type'] === "comment") {
+        console.log("comment: " + JSON.stringify(data))
+        document.getElementById('comment-list').insertAdjacentHTML(
+            'beforeend', '<li>' + data['content'] + '<span class="to-comment">' + data['username'] + '</span></li>'
+        );
+        return;
+    }
     if (data['type'] === "start") {
         console.log("start: " + JSON.stringify(data['members']))
         data['members'].forEach(id => startPeerConnection(id, 'offer'));

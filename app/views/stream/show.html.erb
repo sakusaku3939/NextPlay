@@ -7,11 +7,7 @@
   </div>
   <div class="comment-wrapper">
     <div class="comment-title">コメント</div>
-    <ul id="comment-list">
-      <li>aaa</li>
-      <li>bbb</li>
-      <li>1</li>
-    </ul>
+    <ul id="comment-list"></ul>
   </div>
 </div>
 
@@ -20,7 +16,7 @@
   <div class="row">
     <%= form.hidden_field :profile_id, :value => @profile.id %>
     <%= form.text_field :content, required: true, maxlength: "80", placeholder: "ここにコメントを入力", id: "comment-field", data: { username: @profile.username } %>
-    <%= form.submit "投稿する", class: "button new-post-button", id: "comment-button" %>
+    <%= form.submit "コメントを投稿", class: "button new-post-button", id: "comment-button" %>
   </div>
 <% end %>
 

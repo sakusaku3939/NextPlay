@@ -34,6 +34,11 @@ class SignalingChannel < ApplicationCable::Channel
     if data['type'] == "ice"
       SignalingChannel.broadcast_to(data['id'], { type: data['type'], ice: data['ice'], room: params[:room], id: params[:id] })
     end
+
+    # 配信コメントの投稿
+    if data['type'] == "comment"
+      ActionCable.server.broadcast(room_id, { type: "comment", content: data['content'], username: data['username'] })
+    end
   end
 
   private
