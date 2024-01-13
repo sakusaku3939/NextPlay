@@ -4,6 +4,8 @@
 
 <%= render @post %>
 
-<div class="right">
-  <%= link_to "投稿を削除", @post, data: { turbo_method: :delete, turbo_confirm: "この投稿を削除しますか？" }, class: "delete a" %>
-</div>
+<% if user_signed_in? && current_user.profile.id == @post.profile.id %>
+  <div class="right">
+    <%= link_to "投稿を削除", @post, data: { turbo_method: :delete, turbo_confirm: "この投稿を削除しますか？" }, class: "delete a" %>
+  </div>
+<% end %>

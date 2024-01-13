@@ -17,7 +17,7 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :profile_id, :value => 1 %>
+  <%= form.hidden_field :profile_id, :value => current_user.profile.id %>
 
   <div class="container">
     <div class="posts-container">

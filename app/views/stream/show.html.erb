@@ -14,8 +14,8 @@
 <%= form_with method: :post do |form| %>
   <hr class="line">
   <div class="row">
-    <%= form.hidden_field :profile_id, :value => @profile.id %>
-    <%= form.text_field :content, required: true, maxlength: "80", placeholder: "ここにコメントを入力", id: "comment-field", data: { username: @profile.username } %>
+    <%= form.hidden_field :profile_id, :value => current_user.profile.id %>
+    <%= form.text_field :content, required: true, maxlength: "80", placeholder: "ここにコメントを入力", id: "comment-field", data: { username: current_user.profile.username } %>
     <%= form.submit "コメントを投稿", class: "button new-post-button a", id: "comment-button" %>
   </div>
 <% end %>

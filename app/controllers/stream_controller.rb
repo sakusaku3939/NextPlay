@@ -3,7 +3,6 @@ class StreamController < ApplicationController
 
   def show
     @stream = Stream.find(params[:id])
-    @profile = Profile.find(1)
   end
 
   def new

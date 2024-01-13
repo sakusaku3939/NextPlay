@@ -80,7 +80,7 @@ a:visited {
     display: flex;
 }
 
-.login-container:before {
+.login-button:before {
     display: inline-flex;
     vertical-align: middle;
     font-family: 'Material Icons', sans-serif;
@@ -92,6 +92,10 @@ a:visited {
 
 .login-button, .login-button:visited {
     color: #fff;
+}
+
+.login-text {
+    margin-right: 24px;
 }
 
 
