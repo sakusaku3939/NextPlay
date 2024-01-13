@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'stream/new', to: 'stream#new', as: 'new_stream'
   get 'stream/:id', to: 'stream#show', as: 'stream'
   post 'stream/:id', to: 'stream#create', as: 'streams'
