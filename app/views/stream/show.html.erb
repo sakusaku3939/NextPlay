@@ -1,8 +1,28 @@
 <h1><%= @stream.username %>さんの配信</h1>
 
-<div class="video-frame" data-room-id="<%= @stream.room_id %>">
-  <div id="remote"></div>
+<hr class="line">
+<div class="row">
+  <div class="video-frame" data-room-id="<%= @stream.room_id %>">
+    <div id="remote"></div>
+  </div>
+  <div class="comment-wrapper">
+    <div class="comment-title">コメント</div>
+    <ul id="comment-list">
+      <li>aaa</li>
+      <li>bbb</li>
+      <li>1</li>
+    </ul>
+  </div>
 </div>
+
+<%= form_with method: :post do |form| %>
+  <hr class="line">
+  <div class="row">
+    <%= form.hidden_field :profile_id, :value => @profile.id %>
+    <%= form.text_field :content, required: true, maxlength: "80", placeholder: "ここにコメントを入力", id: "comment-field", data: { username: @profile.username } %>
+    <%= form.submit "投稿する", class: "button new-post-button", id: "comment-button" %>
+  </div>
+<% end %>
 
 <%= content_for :script do %>
   <%= javascript_import_module_tag "webrtc/viewer" %>

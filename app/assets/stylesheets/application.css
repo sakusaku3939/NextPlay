@@ -58,6 +58,10 @@ body {
     justify-content: flex-end;
 }
 
+.row {
+    display: flex;
+}
+
 
 /* posts */
 
@@ -288,17 +292,20 @@ details {
     margin-left: 4px;
 }
 
+
+/* stream */
+
 .video-frame {
+    width: 100%;
+}
+
+video {
     width: 100%;
 }
 
 .video-loader {
     text-align: center;
     padding: 40px 0;
-}
-
-video {
-    width: 100%;
 }
 
 .end-stream-button {
@@ -310,4 +317,46 @@ video {
     font-size: 18px;
     text-align: center;
     margin-top: 8px;
+}
+
+.comment-wrapper {
+    width: 30%;
+    margin: 0 0 4px 16px;
+    background-color: #272738;
+    border-radius: 8px;
+}
+
+.comment-title {
+    font-size: 18px;
+    padding: 8px;
+}
+
+#comment-field {
+    position: relative;
+    color: #fff;
+    background-color: #272738;
+    border-radius: 8px;
+    width: 100%;
+    padding: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    font: inherit;
+    outline: none;
+}
+
+#comment-button {
+    width: 31%;
+    margin-left: 12px;
+}
+
+#comment-list {
+
+}
+
+.line {
+    margin: 4px 0 24px;
+    border-top: 0;
+    border-bottom: 1px solid #aaa;
 }
