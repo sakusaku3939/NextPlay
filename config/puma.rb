@@ -1,10 +1,12 @@
-require 'localhost/authority'
-authority = Localhost::Authority.fetch
+if ENV["RAILS_ENV"] == "development"
+  require 'localhost/authority'
+  authority = Localhost::Authority.fetch
 
-ssl_bind '0.0.0.0', '3001', {
-  key: authority.key_path,
-  cert: authority.certificate_path
-}
+  ssl_bind '0.0.0.0', '3001', {
+    key: authority.key_path,
+    cert: authority.certificate_path
+  }
+end
 
 # This configuration file will be evaluated by Puma. The top-level methods that
 # are invoked here are part of Puma's configuration DSL. For more information
