@@ -1,5 +1,7 @@
 <%= link_to stream, class: "a", data: { turbo: false } do %>
   <div class="stream-img">
-    <%= image_tag url_for(stream.thumbnail) %>
+    <% if stream.thumbnail.present? %>
+      <%= image_tag url_for(stream.thumbnail) %>
+    <% end %>
   </div>
 <% end %>

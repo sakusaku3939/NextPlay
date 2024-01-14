@@ -72,6 +72,9 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    if @post.stream.id.present?
+      Stream.find(@post.stream.id).destroy!
+    end
     @post.destroy!
 
     respond_to do |format|
