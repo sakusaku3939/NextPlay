@@ -26,7 +26,7 @@
       </div>
       <div id="text-length">240/240文字</div>
 
-      <details open>
+      <details>
         <summary>ライブ配信を開始</summary>
         <div class="stream-setting">
           <div>
@@ -34,7 +34,7 @@
             <%= form.file_field :thumbnail, accept: 'image/jpg,image/jpeg,image/png', id: "uploader" %>
           </div>
           <div>
-            <p id="setting-step2">2. 配信環境を設定</p>
+            <p id="setting-step2">2. 配信環境を設定（下をクリック）</p>
             <%= link_to new_stream_path(id: SecureRandom.uuid), class: "a", id: "step2", target: :_blank do %>
               <div class="stream-img"></div>
             <% end %>
