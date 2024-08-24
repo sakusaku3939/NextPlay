@@ -1,28 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap');
 
-.session-container {
+/* logIn, signIn */
+
+.devise-container {
     position: relative;
     max-width: 400px;
     margin: 0 auto;
-    padding: 40px;
+    padding: 40px 56px;
     background-color: #272738;
     border-radius: 8px;
 }
 
-.session-container h2 {
+.devise-container h2 {
     text-align: center;
 }
 
-.session-container .field {
+.devise-container .field {
     margin-bottom: 16px;
 }
 
-.session-container .field label {
+.devise-container .field label {
     display: inline-block;
     padding-bottom: 4px;
+    font-size: 14px;
 }
 
-.session-container input[type="email"], .session-container input[type="password"] {
+.devise-container input[type="email"], .devise-container input[type="password"] {
     width: 100%;
     padding: 16px;
     border: none;
@@ -33,7 +36,7 @@
     box-sizing: border-box;
 }
 
-.session-container .actions input {
+.devise-container .actions input {
     display: inline-block;
     width: 100%;
     background-color: #546E7A;
@@ -45,4 +48,11 @@
     cursor: pointer;
     border: none;
     text-align: center;
+}
+
+
+/* links */
+
+.links-container {
+    margin-top: 24px;
 }
