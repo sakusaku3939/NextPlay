@@ -70,6 +70,10 @@ a:visited {
     display: flex;
 }
 
+.alert {
+    text-align: center;
+}
+
 
 /* user */
 
