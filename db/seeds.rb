@@ -34,3 +34,23 @@ stream1 = Stream.create(room_id: "0", profile_id: 1, username: "bootstrap")
 stream1.thumbnail.attach(io: File.open(Rails.root.join('app/assets/images/valorant_title.jpg')), filename: 'valorant_title.jpg')
 stream2 = Stream.create(room_id: "1", profile_id: 3, username: "ice_protocol")
 stream2.thumbnail.attach(io: File.open(Rails.root.join('app/assets/images/apex_title.jpg')), filename: 'apex_title.jpg')
+
+def reset_id(tablename)
+  connection = ActiveRecord::Base.connection()
+  case connection.adapter_name
+  when 'PostgreSQL'
+    # PostgreSQLの場合
+    connection.execute("SELECT setval('#{tablename}_id_seq', (SELECT COALESCE(MAX(id), 1) FROM #{tablename}))")
+  when 'SQLite'
+    # SQLiteの場合
+    max_id = connection.execute("SELECT COALESCE(MAX(id), 0) FROM #{tablename}").first['COALESCE(MAX(id), 0)']
+    connection.execute("UPDATE sqlite_sequence SET seq = #{max_id} WHERE name = '#{tablename}'")
+  else
+    raise "This task is not implemented for this DB adapter"
+  end
+end
+
+reset_id("users")
+reset_id("profiles")
+reset_id("posts")
+reset_id("streams")
