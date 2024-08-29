@@ -22,9 +22,15 @@ class SignalingChannel < ApplicationCable::Channel
       @@members[room_id] ||= []
       @@members[room_id] << params[:id]
 
-      # 配信者のIDを保持
       if data['is_streamer']
+        # 配信者のIDを保持
         @@streamer_ids[room_id] = params[:id]
+
+        # 視聴者側に配信者の再参加（リロード）を通知
+        viewers = @@members[room_id].reject { |e| e == params[:id] }
+        viewers.each do |viewer_id|
+          SignalingChannel.broadcast_to(viewer_id, { type: "join", room: params[:room], id: params[:id] })
+        end
       end
 
       SignalingChannel.broadcast_to(@@streamer_ids[room_id], { type: "join", room: params[:room], id: params[:id] })
