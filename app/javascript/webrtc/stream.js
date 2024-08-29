@@ -47,7 +47,7 @@ function startVideo() {
         navigator.mediaDevices.getDisplayMedia(displayMediaOptions).then(stream => {
             window.stream = stream;
             localVideo.srcObject = stream;
-            init_signaling(localId, roomId, startPeerConnection);
+            init_signaling(true, localId, roomId, startPeerConnection);
         }).catch(e => {
             alert('配信開始エラー\n\n' + e.name + ': ' + e.message);
         });

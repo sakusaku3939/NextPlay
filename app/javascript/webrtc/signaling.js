@@ -14,11 +14,11 @@ export const _peerConnectionConfig = {
 };
 export let _ws;
 
-export function init_signaling(localId, roomId, startPeerConnection) {
+export function init_signaling(isStreamer, localId, roomId, startPeerConnection) {
     _ws = consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
         connected() {
+            this.perform('speak', {type: "join", is_streamer: isStreamer});
             console.log("コネクションを開始 localId: " + localId + ", roomId: " + roomId);
-            this.perform('speak', {type: "start"});
         },
 
         disconnected() {
@@ -46,7 +46,6 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
     if (data['type'] === "join") {
         console.log("join: " + data['id'])
         startPeerConnection(data['id'], 'offer')
-        return;
     }
     if (data['type'] === "offer") {
         console.log("offer_from: " + data['id'])
@@ -58,13 +57,8 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
         return;
     }
 
-    // 受信データに含まれているSDPをチェック
+    // Offer, AnswerのSDPを処理
     if ("sdp" in data) {
-        if (data['sdp'].sdp.includes('a=inactive')) {
-            console.error("非アクティブな SDP を受信しました (a=inactive)");
-            return;
-        }
-
         if (data['type'] === 'offer') {
             pc.setRemoteDescription(data['sdp']).then(() => {
                 // Answerを送信
@@ -77,16 +71,12 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
     }
 
     if (data['type'] === "ice") {
-        if (data['ice'].usernameFragment) {
-            if (pc.remoteDescription) {
-                pc.addIceCandidate(new RTCIceCandidate(data['ice'])).catch(errorHandler);
-            } else {
-                // SDPが未処理のためキューに貯める
-                pc._queue.push(data);
-                return;
-            }
+        if (pc.remoteDescription) {
+            pc.addIceCandidate(new RTCIceCandidate(data['ice'])).catch(errorHandler);
         } else {
-            console.error("ICE Candidateに null の usernameFragment があります");
+            // SDPが未処理のためキューに貯める
+            pc._queue.push(data);
+            return;
         }
     }
 

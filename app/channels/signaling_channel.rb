@@ -1,5 +1,6 @@
 class SignalingChannel < ApplicationCable::Channel
   @@members = {}
+  @@streamer_ids = {}
 
   def subscribed
     room_id = "room_#{params[:room]}"
@@ -7,17 +8,6 @@ class SignalingChannel < ApplicationCable::Channel
     # 新しいユーザーが参加したとき
     stream_from room_id
     stream_for params[:id]
-
-    # 参加者リストを更新
-    @@members[room_id] ||= []
-    @@members[room_id] << params[:id]
-
-    other_members = @@members[room_id].reject { |member_id| member_id == params[:id] }
-
-    # 各メンバーに対して個別にメッセージを送信
-    other_members.each do |member_id|
-      SignalingChannel.broadcast_to(member_id, { type: "join", room: params[:room], id: params[:id] })
-    end
   end
 
   def unsubscribed
@@ -27,8 +17,17 @@ class SignalingChannel < ApplicationCable::Channel
   def speak(data)
     room_id = "room_#{params[:room]}"
 
-    if data['type'] == "start"
-      SignalingChannel.broadcast_to(params[:id], { type: "start", members: @@members[room_id].reject { |e| e == params[:id] } })
+    if data['type'] == "join"
+      # 新しいユーザーが参加したら参加者リストを更新
+      @@members[room_id] ||= []
+      @@members[room_id] << params[:id]
+
+      # 配信者のIDを保持
+      if data['is_streamer']
+        @@streamer_ids[room_id] = params[:id]
+      end
+
+      SignalingChannel.broadcast_to(@@streamer_ids[room_id], { type: "join", room: params[:room], id: params[:id] })
     end
     if data['type'] == "leave"
       leave

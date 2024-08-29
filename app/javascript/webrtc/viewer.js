@@ -28,7 +28,7 @@ document.addEventListener('turbo:load', () => {
     // WebRTCの受信、Websocketの接続
     navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
         localStream = stream;
-        init_signaling(localId, roomId, startPeerConnection);
+        init_signaling(false, localId, roomId, startPeerConnection);
     })
 });
 
