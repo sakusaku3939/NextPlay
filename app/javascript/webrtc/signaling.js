@@ -17,7 +17,7 @@ export let _ws;
 export function init_signaling(localId, roomId, startPeerConnection) {
     _ws = consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
         connected() {
-            console.log("connected with localId: " + localId + ", roomId: " + roomId);
+            console.log("コネクションを開始 localId: " + localId + ", roomId: " + roomId);
             this.perform('speak', {type: "start"});
         },
 
@@ -61,7 +61,7 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
     // 受信データに含まれているSDPをチェック
     if ("sdp" in data) {
         if (data['sdp'].sdp.includes('a=inactive')) {
-            console.error("Received an inactive SDP. Ignoring...");
+            console.error("非アクティブな SDP を受信しました (a=inactive)");
             return;
         }
 
@@ -86,7 +86,7 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
                 return;
             }
         } else {
-            console.error("ICE candidate has a null usernameFragment. Ignoring...");
+            console.error("ICE Candidateに null の usernameFragment があります");
         }
     }
 

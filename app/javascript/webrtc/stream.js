@@ -49,10 +49,10 @@ function startVideo() {
             localVideo.srcObject = stream;
             init_signaling(localId, roomId, startPeerConnection);
         }).catch(e => {
-            alert('Media start error.\n\n' + e.name + ': ' + e.message);
+            alert('配信開始エラー\n\n' + e.name + ': ' + e.message);
         });
     } else {
-        alert('Your browser does not support getDisplayMedia API');
+        alert('お使いのブラウザは getDisplayMedia API をサポートしていません');
     }
 }
 
