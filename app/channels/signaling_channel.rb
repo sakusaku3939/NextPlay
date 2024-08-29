@@ -12,7 +12,12 @@ class SignalingChannel < ApplicationCable::Channel
     @@members[room_id] ||= []
     @@members[room_id] << params[:id]
 
-    ActionCable.server.broadcast(room_id, { type: "join", room: params[:room], id: params[:id] })
+    other_members = @@members[room_id].reject { |member_id| member_id == params[:id] }
+
+    # 各メンバーに対して個別にメッセージを送信
+    other_members.each do |member_id|
+      SignalingChannel.broadcast_to(member_id, { type: "join", room: params[:room], id: params[:id] })
+    end
   end
 
   def unsubscribed
