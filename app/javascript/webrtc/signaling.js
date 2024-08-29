@@ -34,10 +34,13 @@ export function init_signaling(isStreamer, localId, roomId, startPeerConnection)
 function gotMessageFromServer(data, localId, startPeerConnection) {
     // コメントの受信
     if (data['type'] === "comment") {
-        console.log("comment: " + JSON.stringify(data))
-        document.getElementById('comment-list').insertAdjacentHTML(
-            'beforeend', '<li>' + data['content'] + '<span class="to-comment">' + data['username'] + '</span></li>'
-        );
+        console.log("コメント: " + JSON.stringify(data))
+        const commentList = document.getElementsByClassName('comment-list')
+        for (let i = 0; i < commentList.length; i++) {
+            commentList[i].insertAdjacentHTML(
+                'beforeend', '<li>' + data['content'] + '<span class="to-comment">' + data['username'] + '</span></li>'
+            );
+        }
         return;
     }
     console.log(JSON.stringify(data));

@@ -7,7 +7,7 @@
   </div>
   <div class="comment-wrapper">
     <div class="comment-title">コメント</div>
-    <ul id="comment-list"></ul>
+    <ul class="comment-list"></ul>
   </div>
 </div>
 
@@ -19,6 +19,12 @@
     <%= form.submit "コメントを投稿", class: "button new-post-button a", id: "comment-button" %>
   </div>
 <% end %>
+
+<hr class="line small-screen">
+<div class="comment-wrapper small-screen">
+  <div class="comment-title">コメント</div>
+  <ul class="comment-list"></ul>
+</div>
 
 <%= content_for :script do %>
   <%= javascript_import_module_tag "webrtc/viewer" %>

@@ -1,0 +1,111 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@media screen and (max-width: 1200px) {
+    body {
+        padding: 56px 32px;
+    }
+
+    .sidebar-container {
+        margin-left: 24px;
+    }
+
+    .comment-wrapper {
+        display: none;
+    }
+
+    .comment-wrapper.small-screen {
+        display: block;
+    }
+
+    .line.small-screen {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .logo {
+        margin-top: 56px;
+    }
+
+    .container {
+        flex-direction: column-reverse;
+    }
+
+    .stream-container {
+        display: none;
+    }
+
+    .login-container {
+        justify-content: space-between;
+        padding: 0 24px;
+        left: 0;
+        right: 0;
+    }
+
+    .sidebar-container {
+        margin-left: 0;
+    }
+
+    .new-post-button:not(#comment-button) {
+        margin-bottom: 24px;
+        padding: 12px 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .stream-setting {
+        flex-direction: column;
+        max-width: 320px;
+    }
+
+    #comment-button {
+        min-width: 180px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        padding: 56px 16px;
+    }
+
+    .post-stream-wrapper {
+        width: 100%;
+    }
+
+    .stream-img {
+        width: 95%;
+        padding-top: 53.438%;
+        min-width: auto;
+    }
+
+    .post > img {
+        margin-top: 8px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .devise-container {
+        padding: 40px 32px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    #comment-field {
+        width: auto;
+    }
+
+    #comment-button {
+        margin: 16px 0;
+        padding: 12px 0;
+        width: 100%;
+    }
+
+    .line.small-screen {
+        margin-top: 16px;
+    }
+}

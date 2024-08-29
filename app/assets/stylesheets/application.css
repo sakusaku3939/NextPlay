@@ -132,13 +132,14 @@ a:visited {
     z-index: 1;
 }
 
-.post img {
+.post > img {
     width: 46px;
     height: 46px;
 }
 
 .content {
     display: inline;
+    width: 100%;
     margin-left: 12px;
 }
 
@@ -183,6 +184,7 @@ a:visited {
 
 .sidebar-container {
     flex: 1;
+    min-width: 260px;
     margin-left: 40px;
 }
 
@@ -367,6 +369,12 @@ video {
     overflow-y: auto;
 }
 
+.comment-wrapper.small-screen {
+    display: none;
+    width: 100%;
+    margin: 24px 0 0;
+}
+
 .comment-title {
     font-size: 18px;
     padding: 8px;
@@ -389,10 +397,11 @@ video {
 
 #comment-button {
     width: 31%;
+    min-width: 200px;
     margin-left: 12px;
 }
 
-#comment-list li {
+.comment-list li {
     margin-right: 8px;
     margin-bottom: 8px;
 }
@@ -401,4 +410,9 @@ video {
     margin: 4px 0 24px;
     border-top: 0;
     border-bottom: 1px solid #aaa;
+}
+
+.line.small-screen {
+    display: none;
+    margin: 32px 0 0;
 }

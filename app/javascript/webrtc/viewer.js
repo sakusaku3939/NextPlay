@@ -1,4 +1,4 @@
-import {init_signaling, _peerConnectionConfig, _peers} from "./signaling"
+import {init_signaling, _peerConnectionConfig, _peers, _ws} from "./signaling"
 import {createOffer, createPeerConnection} from "./webrtc";
 
 let localStream;
@@ -11,11 +11,11 @@ document.addEventListener('turbo:load', () => {
     const videoFrame = document.querySelector('.video-frame');
     roomId = videoFrame.dataset.roomId;
 
-    // 配信コメントの送信
+    // 配信コメントの送信ボタンクリック時
     document.getElementById('comment-button').addEventListener('click', () => {
         const commentField = document.getElementById('comment-field');
         if (commentField.value) {
-            ws.perform('speak', {
+            _ws.perform('speak', {
                 type: "comment",
                 content: commentField.value,
                 username: commentField.dataset.username

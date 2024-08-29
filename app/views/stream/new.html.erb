@@ -8,12 +8,17 @@
   </div>
   <div class="comment-wrapper">
     <div class="comment-title">コメント</div>
-    <ul id="comment-list"></ul>
+    <ul class="comment-list"></ul>
   </div>
 </div>
 <hr class="line">
 
 <%= button_tag "配信を終了する", class: "end-stream-button button", type: "button", onclick: "closeTab()" %>
+
+<div class="comment-wrapper small-screen">
+  <div class="comment-title">コメント</div>
+  <ul class="comment-list"></ul>
+</div>
 
 <%= content_for :script do %>
   <%= javascript_import_module_tag "webrtc/stream" %>
