@@ -11,7 +11,9 @@
     .sidebar-container {
         margin-left: 24px;
     }
+}
 
+@media screen and (max-width: 900px) {
     .comment-wrapper {
         display: none;
     }
