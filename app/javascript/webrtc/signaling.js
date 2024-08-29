@@ -44,11 +44,11 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
 
     // Offer, Answerのピアコネクションを作成
     if (data['type'] === "join") {
-        console.log("join: " + data['id'])
+        console.log("新しいユーザーが参加 ID: " + data['id'])
         startPeerConnection(data['id'], 'offer')
     }
     if (data['type'] === "offer") {
-        console.log("offer_from: " + data['id'])
+        console.log("offer側のID: " + data['id'])
         startPeerConnection(data['id'], 'answer');
     }
 

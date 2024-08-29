@@ -7,7 +7,7 @@ export function createPeerConnection(pc, sdpType, id) {
             pc.setLocalDescription(description).then(() => {
                 // SDP送信
                 _ws.perform('speak', {type: sdpType, sdp: pc.localDescription, id: id});
-                console.log("SDPを送信: ", pc.localDescription);
+                console.log(sdpType + "でSDPを送信: ", pc.localDescription);
             }).catch(errorHandler);
         }
     }
