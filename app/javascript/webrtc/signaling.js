@@ -1,4 +1,4 @@
-import consumer from "./consumer";
+import consumer from "../consumer";
 import {createAnswer} from "./webrtc";
 
 export const _peers = new Map();
