@@ -1,15 +1,8 @@
-/*
-* 参考（元となったコード）
-* MIT License
-* Copyright (c) 2022 nakka
-*
-* https://github.com/nakkag/webrtc_mesh/blob/main/webrtc_mesh.js
-* */
-import {peers, peerConnectionConfig, init_signaling, errorHandler} from "./signaling"
+import {_ws, errorHandler, init_signaling, _peerConnectionConfig, _peers} from "./signaling"
 
 let localStream;
 let roomId;
-let signaling;
+
 const localId = Math.random().toString(36).slice(-4) + '_' + new Date().getTime();
 document.addEventListener('turbo:load', () => {
     // ローディング表示、ルームIDを設定
@@ -21,7 +14,7 @@ document.addEventListener('turbo:load', () => {
     document.getElementById('comment-button').addEventListener('click', () => {
         const commentField = document.getElementById('comment-field');
         if (commentField.value) {
-            signaling.perform('speak', {
+            ws.perform('speak', {
                 type: "comment",
                 content: commentField.value,
                 username: commentField.dataset.username
@@ -31,18 +24,18 @@ document.addEventListener('turbo:load', () => {
         }
     });
 
-    // WebRTCの受信設定
+    // WebRTCの受信、Websocketの接続
     navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
-        signaling = init_signaling(localId, roomId, startPeerConnection);
         localStream = stream;
+        init_signaling(localId, roomId, startPeerConnection);
     })
 });
 
 function startPeerConnection(id, sdpType) {
-    if (peers.has(id)) {
-        peers.get(id)._stopPeerConnection();
+    if (_peers.has(id)) {
+        _peers.get(id)._stopPeerConnection();
     }
-    let pc = new RTCPeerConnection(peerConnectionConfig);
+    let pc = new RTCPeerConnection(_peerConnectionConfig);
 
     document.getElementById('remote').innerHTML = '<video id="' + id + '" playsinline autoplay></video>';
 
@@ -52,7 +45,8 @@ function startPeerConnection(id, sdpType) {
         if (pc) {
             pc.setLocalDescription(description).then(() => {
                 // SDP送信
-                signaling.perform('speak', {type: sdpType, sdp: pc.localDescription, id: id});
+                _ws.perform('speak', {type: sdpType, sdp: pc.localDescription, id: id});
+                console.log("Sending SDP: ", pc.localDescription);
             }).catch(errorHandler);
         }
     }
@@ -61,7 +55,8 @@ function startPeerConnection(id, sdpType) {
     pc.onicecandidate = function (event) {
         if (event.candidate) {
             // ICE送信
-            signaling.perform('speak', {type: "ice", ice: event.candidate, id: id});
+            _ws.perform('speak', {type: "ice", ice: event.candidate, id: id});
+            console.log("Sending ICE Candidate: ", event.candidate);
         }
     };
     pc.ontrack = function (event) {
@@ -96,10 +91,10 @@ function startPeerConnection(id, sdpType) {
         }
         pc.close();
         pc = null;
-        peers.delete(id);
+        _peers.delete(id);
         document.getElementById('remote').innerHTML = '<div class="video-loader">ロード中です。。。</div>';
     };
-    peers.set(id, pc);
+    _peers.set(id, pc);
 
     if (sdpType === 'offer') {
         // Offerの作成

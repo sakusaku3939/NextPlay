@@ -1,14 +1,7 @@
-/*
-* 参考（元となったコード）
-* MIT License
-* Copyright (c) 2022 nakka
-*
-* https://github.com/nakkag/webrtc_mesh/blob/main/webrtc_mesh.js
-* */
 import consumer from "./consumer";
 
-export const peers = new Map();
-export const peerConnectionConfig = {
+export const _peers = new Map();
+export const _peerConnectionConfig = {
     iceServers: [
         // GoogleのパブリックSTUNサーバー
         {urls: 'stun:stun.l.google.com:19302'},
@@ -18,9 +11,10 @@ export const peerConnectionConfig = {
         //{urls: 'turn:turn_server', username:'', credential:''}
     ]
 };
+export let _ws;
 
 export function init_signaling(localId, roomId, startPeerConnection) {
-    return consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
+    _ws = consumer.subscriptions.create({channel: "SignalingChannel", room: roomId, id: localId}, {
         connected() {
             console.log("connected with localId: " + localId + ", roomId: " + roomId);
             this.perform('speak', {type: "start"});
@@ -37,6 +31,7 @@ export function init_signaling(localId, roomId, startPeerConnection) {
 }
 
 function gotMessageFromServer(data, localId, startPeerConnection) {
+    // コメントの受信
     if (data['type'] === "comment") {
         console.log("comment: " + JSON.stringify(data))
         document.getElementById('comment-list').insertAdjacentHTML(
@@ -44,32 +39,31 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
         );
         return;
     }
-    if (data['type'] === "start") {
-        console.log("start: " + JSON.stringify(data['members']))
-        data['members'].forEach(id => startPeerConnection(id, 'offer'));
-        return;
-    }
-    if (data['type'] === "join") {
-        console.log("join: " + data['id'])
-        startPeerConnection(data['id'], "answer");
-        return;
-    }
     console.log(JSON.stringify(data));
 
-    const pc = peers.get(data['id']);
+    // Offer, Answerのピアコネクションを作成
+    if (data['type'] === "join") {
+        console.log("join: " + data['id'])
+        startPeerConnection(data['id'], 'offer')
+        return;
+    }
+    if (data['type'] === "offer") {
+        console.log("offer_from: " + data['id'])
+        startPeerConnection(data['id'], 'answer');
+    }
+
+    const pc = _peers.get(data['id']);
     if (!pc) {
         return;
     }
-    if (data['type'] === "leave") {
-        // 退出通知
-        console.log("leave: " + data['id'])
-        pc._stopPeerConnection();
-        return;
-    }
 
-    // WebRTCのシグナリング
+    // Answerの作成
     if ("sdp" in data) {
-        // SDP受信
+        if (data['sdp'].sdp.includes('a=inactive')) {
+            console.error("Received an inactive SDP. Ignoring...");
+            return;
+        }
+
         if (data['type'] === 'offer') {
             pc.setRemoteDescription(data['sdp']).then(() => {
                 // Answerの作成
@@ -79,19 +73,30 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
             pc.setRemoteDescription(data['sdp']).catch(errorHandler);
         }
     }
+
     if (data['type'] === "ice") {
-        // ICE受信
-        if (pc.remoteDescription) {
-            pc.addIceCandidate(new RTCIceCandidate(data['ice'])).catch(errorHandler);
+        if (data['ice'].usernameFragment) {
+            if (pc.remoteDescription) {
+                pc.addIceCandidate(new RTCIceCandidate(data['ice'])).catch(errorHandler);
+            } else {
+                // SDPが未処理のためキューに貯める
+                pc._queue.push(data);
+                return;
+            }
         } else {
-            // SDPが未処理のためキューに貯める
-            pc._queue.push(data);
-            return;
+            console.error("ICE candidate has a null usernameFragment. Ignoring...");
         }
     }
+
     if (pc._queue.length > 0 && pc.remoteDescription) {
         // キューのメッセージを再処理
         gotMessageFromServer(pc._queue.shift(), localId, startPeerConnection);
+    }
+
+    if (data['type'] === "leave") {
+        // 退出通知
+        console.log("leave: " + data['id'])
+        pc._stopPeerConnection();
     }
 }
 
