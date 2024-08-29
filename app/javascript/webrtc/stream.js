@@ -1,4 +1,5 @@
-import {init_signaling, _peers, errorHandler, _peerConnectionConfig, _ws} from "./signaling"
+import {init_signaling, _peers, _peerConnectionConfig, _ws} from "./signaling"
+import {createOffer, createPeerConnection} from "./webrtc";
 
 let localVideo;
 let roomId;
@@ -61,44 +62,32 @@ function startPeerConnection(id, sdpType) {
     }
     let pc = new RTCPeerConnection(_peerConnectionConfig);
 
-    pc._queue = [];
-    pc._setDescription = function (description) {
-        if (pc) {
-            pc.setLocalDescription(description).then(() => {
-                // SDP送信
-                _ws.perform('speak', {type: sdpType, sdp: pc.localDescription, id: id});
-                console.log("Sending SDP: ", pc.localDescription);
-            }).catch(errorHandler);
-        }
-    }
-    pc.onicecandidate = function (event) {
-        if (event.candidate) {
-            // ICE送信
-            _ws.perform('speak', {type: "ice", ice: event.candidate, id: id});
-            console.log("Sending ICE Candidate: ", event.candidate);
-        }
-    };
+    pc = createPeerConnection(pc, sdpType, id);
+
+    // Local側のストリームを設定
     if (window.stream) {
-        // Local側のストリームを設定
         window.stream.getTracks().forEach(track => {
             pc.addTrack(track, window.stream);
             track.onended = () => _ws.perform('speak', {type: "leave"});
         });
     }
 
+    // 相手のコネクションの終了時
     pc._stopPeerConnection = function () {
         if (!pc) {
             return;
         }
-        console.log("close")
+        console.log("コネクション終了: " + id);
+
         pc.close();
         pc = null;
         _peers.delete(id);
     };
+
     _peers.set(id, pc);
 
+    // 自分がOffer側の場合はOfferを送信する
     if (sdpType === 'offer') {
-        // Offerの作成
-        pc.createOffer().then(pc._setDescription).catch(errorHandler);
+        createOffer(pc);
     }
 }

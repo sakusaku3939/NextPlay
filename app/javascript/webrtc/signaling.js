@@ -1,4 +1,5 @@
 import consumer from "./consumer";
+import {createAnswer} from "./webrtc";
 
 export const _peers = new Map();
 export const _peerConnectionConfig = {
@@ -57,7 +58,7 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
         return;
     }
 
-    // Answerの作成
+    // 受信データに含まれているSDPをチェック
     if ("sdp" in data) {
         if (data['sdp'].sdp.includes('a=inactive')) {
             console.error("Received an inactive SDP. Ignoring...");
@@ -66,9 +67,10 @@ function gotMessageFromServer(data, localId, startPeerConnection) {
 
         if (data['type'] === 'offer') {
             pc.setRemoteDescription(data['sdp']).then(() => {
-                // Answerの作成
-                pc.createAnswer().then(pc._setDescription).catch(errorHandler);
+                // Answerを送信
+                createAnswer(pc);
             }).catch(errorHandler);
+
         } else if (data['type'] === 'answer') {
             pc.setRemoteDescription(data['sdp']).catch(errorHandler);
         }
