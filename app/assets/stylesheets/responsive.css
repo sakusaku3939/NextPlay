@@ -73,6 +73,10 @@
         padding: 56px 16px;
     }
 
+    .logo {
+        font-size: 28px;
+    }
+
     .post-stream-wrapper {
         width: 100%;
     }
