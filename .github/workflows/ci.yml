@@ -41,4 +41,5 @@ jobs:
           RAILS_ENV: production
           SECRET_KEY_BASE_DUMMY: "1"
           BUNDLE_WITHOUT: development:test
-        run: bin/rails runner 'puts "Rails #{Rails.version}"; puts ActionCable.server.pubsub.class.name'
+        run: |
+          bin/rails runner 'puts Rails.version; puts ActionCable.server.pubsub.class.name'
