@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "3.4.12"
 
 gem 'devise'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3"
+gem "rails", "~> 8.1.4", ">= 8.1.4.1"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -26,10 +26,9 @@ gem "turbo-rails"
 gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem "jbuilder", ">= 2.13"
 
-# Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
+# The Redis adapter used by config/cable.yml is included in production below.
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -47,7 +46,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "sqlite3", "~> 2.9"
+  gem "sqlite3", "~> 2.10", ">= 2.10.2"
+  gem "bundler-audit", "~> 0.9"
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -67,11 +67,14 @@ group :development do
 end
 
 group :test do
+  gem "minitest-mock", "~> 5.27", require: false
+
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
+  gem "capybara", ">= 3.40"
   gem "selenium-webdriver"
 end
 
 group :production do
-  gem "pg"
+  gem "pg", ">= 1.6"
+  gem "redis", "~> 5.4"
 end

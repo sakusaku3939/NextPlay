@@ -1,11 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  user_id: 1
-  username: MyString
-  nickname: MyString
+  user: one
+  username: player_one
+  nickname: プレイヤー一
 
 two:
-  user_id: 1
-  username: MyString
-  nickname: MyString
+  user: two
+  username: player_two
+  nickname: プレイヤー二
