@@ -70,7 +70,7 @@ group :test do
   gem "minitest-mock", "~> 5.27", require: false
 
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
+  gem "capybara", ">= 3.40"
   gem "selenium-webdriver"
 end
 
