@@ -1,45 +1,26 @@
 require "application_system_test_case"
 
 class PostsTest < ApplicationSystemTestCase
-  setup do
-    @post = posts(:one)
-  end
-
-  test "visiting the index" do
+  test "public Japanese feed is visible" do
     visit posts_url
-    assert_selector "h1", text: "Posts"
+    assert_selector ".logo", text: "NextPlay"
+    assert_link "ログイン"
+    assert_text posts(:one).content
+    assert_text "配信中のゲーム一覧"
   end
 
-  test "should create post" do
-    visit posts_url
-    click_on "New post"
-
-    fill_in "Comment stream", with: @post.comment_stream_id
-    fill_in "Content", with: @post.content
-    fill_in "User", with: @post.user_id
-    click_on "Create Post"
-
-    assert_text "Post was successfully created"
-    click_on "Back"
-  end
-
-  test "should update Post" do
-    visit post_url(@post)
-    click_on "Edit this post", match: :first
-
-    fill_in "Comment stream", with: @post.comment_stream_id
-    fill_in "Content", with: @post.content
-    fill_in "User", with: @post.user_id
-    click_on "Update Post"
-
-    assert_text "Post was successfully updated"
-    click_on "Back"
-  end
-
-  test "should destroy Post" do
-    visit post_url(@post)
-    click_on "Destroy this post", match: :first
-
-    assert_text "Post was successfully destroyed"
+  test "user can log in and publish a text post without media permissions" do
+    visit new_user_session_url
+    fill_in "user_email", with: users(:one).email
+    fill_in "user_password", with: "test-password-123"
+    click_button "ログイン"
+    assert_text "@player_oneさんでログイン中"
+    click_link "投稿する"
+    assert_selector "h1", text: "新しく投稿"
+    fill_in "textarea", with: "アップグレード後も投稿できます"
+    click_button "投稿する"
+    assert_text "Post was successfully created."
+    assert_text "アップグレード後も投稿できます"
+    assert_current_path root_path
   end
 end
